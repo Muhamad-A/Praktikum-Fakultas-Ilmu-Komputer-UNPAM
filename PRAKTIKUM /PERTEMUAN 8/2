@@ -1,0 +1,20 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
+pts = np.array([[0,0],[2,0],[1,2],[0,0]])
+pts_h = np.column_stack([pts[:,0] + 0.4*pts[:,1], pts[:,1]])
+
+plt.figure(figsize=(10,4))
+
+plt.subplot(121)
+plt.plot(pts[:,0], pts[:,1], 'b-o')
+plt.title('Original')
+plt.axis('equal')
+
+plt.subplot(122)                        
+plt.plot(pts_h[:,0], pts_h[:,1], 'r-o')
+plt.title('Sheared')
+plt.axis('equal')
+
+plt.tight_layout()
+plt.show()
