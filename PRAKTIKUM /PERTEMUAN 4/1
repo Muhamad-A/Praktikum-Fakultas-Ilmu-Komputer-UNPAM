@@ -1,0 +1,59 @@
+import matplotlib.pyplot as plt
+
+def algoritma_dda(x1, y1, x2, y2):
+    """
+    Algoritma DDA untuk menggambar garis dari (x1,y1) ke (x2,y2)
+    """
+
+    dx = x2 - x1
+    dy = y2 - y1
+
+    steps = int(max(abs(dx), abs(dy)))
+
+    if steps == 0:
+        return [x1], [y1]
+
+    x_increment = dx / steps
+    y_increment = dy / steps
+
+    x = x1
+    y = y1
+
+    titik_x = []
+    titik_y = []
+
+    for _ in range(steps + 1):
+        titik_x.append(int(round(x)))
+        titik_y.append(int(round(y)))
+        x += x_increment
+        y += y_increment
+
+    return titik_x, titik_y
+
+
+x1, y1 = 2, 3
+x2, y2 = 10, 8
+
+x_points, y_points = algoritma_dda(x1, y1, x2, y2)
+
+print("ALGORITMA DDA")
+print("=" * 40)
+print("Titik-titik yang dihasilkan:")
+
+for x, y in zip(x_points, y_points):
+    print(f"({x}, {y})")
+
+
+plt.figure(figsize=(8, 6))
+
+plt.plot([x1, x2], [y1, y2], 'r--', alpha=0.5, label='Garis sebenarnya')
+plt.scatter(x_points, y_points, c='blue', s=80, label='Titik DDA')
+
+plt.grid(True)
+plt.xlabel('X')
+plt.ylabel('Y')
+plt.title('Algoritma DDA')
+plt.legend()
+plt.axis('equal')
+
+plt.show()
