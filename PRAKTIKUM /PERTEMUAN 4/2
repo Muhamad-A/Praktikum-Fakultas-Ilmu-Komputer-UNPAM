@@ -1,0 +1,98 @@
+import matplotlib.pyplot as plt
+def algoritma_midpoint(x1, y1, x2, y2):
+    """
+    Algoritma Midpoint untuk menggambar garis
+    """
+
+    titik_x = []
+    titik_y = []
+
+    x, y = x1, y1
+
+    dx = x2 - x1
+    dy = y2 - y1
+
+    if dx < 0:
+        dx = -dx
+        x_inc = -1
+    else:
+        x_inc = 1
+
+    if dy < 0:
+        dy = -dy
+        y_inc = -1
+    else:
+        y_inc = 1
+
+    titik_x.append(x)
+    titik_y.append(y)
+
+    if dx == 0:
+        for _ in range(dy):
+            y += y_inc
+            titik_x.append(x)
+            titik_y.append(y)
+        return titik_x, titik_y
+
+    if dy == 0:
+        for _ in range(dx):
+            x += x_inc
+            titik_x.append(x)
+            titik_y.append(y)
+        return titik_x, titik_y
+
+    if dx >= dy:  # landai
+        d = 2 * dy - dx
+        for _ in range(dx):
+            x += x_inc
+            if d < 0:
+                d += 2 * dy
+            else:
+                y += y_inc
+                d += 2 * (dy - dx)
+            titik_x.append(x)
+            titik_y.append(y)
+
+    else:  
+        d = 2 * dx - dy
+        for _ in range(dy):
+            y += y_inc
+            if d < 0:
+                d += 2 * dx
+            else:
+                x += x_inc
+                d += 2 * (dx - dy)
+            titik_x.append(x)
+            titik_y.append(y)
+
+    return titik_x, titik_y
+
+
+x1, y1 = 2, 3
+x2, y2 = 12, 7
+
+x_points, y_points = algoritma_midpoint(x1, y1, x2, y2)
+
+print("ALGORITMA MIDPOINT")
+print("=" * 40)
+print("Titik-titik yang dihasilkan:")
+
+for x, y in zip(x_points, y_points):
+    print(f"({x}, {y})")
+
+plt.figure(figsize=(10, 6))
+
+plt.plot([x1, x2], [y1, y2], 'r--', alpha=0.5, linewidth=2, label='Garis ideal')
+
+plt.scatter(x_points, y_points, c='purple', s=100, label='Titik Midpoint')
+for i, (x, y) in enumerate(zip(x_points, y_points)):
+    plt.annotate(f'{i}', (x, y), xytext=(5, 5), textcoords='offset points', fontsize=8)
+
+plt.grid(True)
+plt.xlabel('X')
+plt.ylabel('Y')
+plt.title('Algoritma Midpoint')
+plt.legend()
+plt.axis('equal')
+
+plt.show()
