@@ -1,0 +1,12 @@
+def translasi_koordinat(x, y, dx, dy):
+    x_baru = x + dx
+    y_baru = y + dy
+    return x_baru, y_baru
+
+x_awal, y_awal = 10, 5
+dx, dy = 3, -2
+
+x_baru, y_baru = translasi_koordinat(x_awal, y_awal, dx, dy)
+
+print(f"Titik awal: ({x_awal}, {y_awal})")
+print(f"Setelah translasi: ({dx}, {dy}): ({x_baru}, {y_baru})")
